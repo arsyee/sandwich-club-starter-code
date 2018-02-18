@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -43,7 +44,31 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
+        StringBuilder builder;
+        // populateUI(); // other elements are also set in onCreate, so I just stuck to it
+
+        TextView mOriginTextView = findViewById(R.id.origin_tv);
+        mOriginTextView.setText(sandwich.getPlaceOfOrigin());
+
+        TextView mDescriptionTextView = findViewById(R.id.description_tv);
+        mDescriptionTextView.setText(sandwich.getDescription());
+
+        TextView mAlsoKnownTextView = findViewById(R.id.also_known_tv);
+        builder = new StringBuilder();
+        for (int i = 0; i < sandwich.getAlsoKnownAs().size(); ++i) {
+            if (i != 0) builder.append("\n");
+            builder.append(sandwich.getAlsoKnownAs().get(i));
+        }
+        mAlsoKnownTextView.setText(builder.toString());
+
+        TextView mIngredientsTextView = findViewById(R.id.ingredients_tv);
+        builder = new StringBuilder();
+        for (int i = 0; i < sandwich.getIngredients().size(); ++i) {
+            if (i != 0) builder.append("\n");
+            builder.append(sandwich.getIngredients().get(i));
+        }
+        mIngredientsTextView.setText(builder.toString());
+
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
