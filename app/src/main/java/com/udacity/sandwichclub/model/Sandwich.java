@@ -2,6 +2,7 @@ package com.udacity.sandwichclub.model;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class Sandwich {
 
     private String mainName;

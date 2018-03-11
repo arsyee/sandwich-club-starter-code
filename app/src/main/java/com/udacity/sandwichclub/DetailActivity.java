@@ -46,7 +46,6 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        StringBuilder builder;
         // populateUI(); // other elements are also set in onCreate, so I just stuck to it
 
         TextView mOriginTextView = findViewById(R.id.origin_tv);
@@ -73,7 +72,5 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
-
-    }
+    // private void populateUI() {}
 }
