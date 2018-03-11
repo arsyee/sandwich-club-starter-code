@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,8 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+        int position = DEFAULT_POSITION;
+        if (intent != null) position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
@@ -54,20 +56,10 @@ public class DetailActivity extends AppCompatActivity {
         mDescriptionTextView.setText(sandwich.getDescription());
 
         TextView mAlsoKnownTextView = findViewById(R.id.also_known_tv);
-        builder = new StringBuilder();
-        for (int i = 0; i < sandwich.getAlsoKnownAs().size(); ++i) {
-            if (i != 0) builder.append("\n");
-            builder.append(sandwich.getAlsoKnownAs().get(i));
-        }
-        mAlsoKnownTextView.setText(builder.toString());
+        mAlsoKnownTextView.setText(TextUtils.join("\n", sandwich.getAlsoKnownAs()));
 
         TextView mIngredientsTextView = findViewById(R.id.ingredients_tv);
-        builder = new StringBuilder();
-        for (int i = 0; i < sandwich.getIngredients().size(); ++i) {
-            if (i != 0) builder.append("\n");
-            builder.append(sandwich.getIngredients().get(i));
-        }
-        mIngredientsTextView.setText(builder.toString());
+        mIngredientsTextView.setText(TextUtils.join("\n", sandwich.getIngredients()));
 
         Picasso.with(this)
                 .load(sandwich.getImage())
